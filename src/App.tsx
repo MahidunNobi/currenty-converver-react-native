@@ -28,14 +28,27 @@ import CurrencyButton from './components/CurrencyButton';
 function App(): React.JSX.Element {
   const [input, setInput] = useState('');
   const [targetCurrency, setTargetCurrency] = useState('');
+  const [resultValue, setresultValue] = useState('');
 
   const buttonPressed = (item: Currency) => {
+    setresultValue('');
     setTargetCurrency(item.name);
-    Snackbar.show({
-      text: item.name,
-      backgroundColor: '#8B78E6',
-      textColor: '#2B2B52',
-    });
+    if (!input) {
+      return Snackbar.show({
+        text: 'Please  Provide a valid number',
+        backgroundColor: '#FF3031',
+        textColor: '#FFFFFF',
+      });
+    }
+    const inputNum = parseFloat(input);
+    if (isNaN(inputNum)) {
+      return Snackbar.show({
+        text: 'Please  Provide a valid number',
+        backgroundColor: '#FF3031',
+        textColor: '#FFFFFF',
+      });
+    }
+    setresultValue((inputNum * item.value).toFixed(2));
   };
 
   return (
@@ -45,6 +58,10 @@ function App(): React.JSX.Element {
       // backgroundColor={backgroundStyle.backgroundColor}
       />
       <View style={styles.topContainer}>
+        <Text style={styles.resultTxt}>
+          {' '}
+          {resultValue !== '' && `Your converted value is ${resultValue} 🤑`}
+        </Text>
         <TextInput
           style={styles.inputAmountField}
           placeholder="Type here to translate!"
@@ -85,7 +102,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
   },
   resultTxt: {
-    fontSize: 32,
+    fontSize: 24,
     color: '#000000',
     fontWeight: '800',
   },
