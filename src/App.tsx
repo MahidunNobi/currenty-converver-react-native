@@ -1,25 +1,14 @@
 import React, {useState} from 'react';
-import type {PropsWithChildren} from 'react';
 import {
   FlatList,
   Pressable,
   SafeAreaView,
-  ScrollView,
   StatusBar,
   StyleSheet,
   Text,
   TextInput,
-  useColorScheme,
   View,
 } from 'react-native';
-
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
 
 import Snackbar from 'react-native-snackbar';
 import {currencyByRupee} from './constants';
